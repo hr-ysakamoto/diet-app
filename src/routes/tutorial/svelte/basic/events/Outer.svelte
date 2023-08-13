@@ -1,5 +1,5 @@
 <script>
-  import Inner from "../svelte/basic/events/Inner.svelte";
+  import Inner from "./Inner.svelte";
 </script>
 
 <Inner on:message />

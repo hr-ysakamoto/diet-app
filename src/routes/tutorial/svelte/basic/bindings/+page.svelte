@@ -3,7 +3,6 @@
     id: number;
     text: string;
   };
-
   let name = "world";
   let a = 1;
   let b = 2;
@@ -31,6 +30,13 @@
       `answered question ${selected.id} (${selected.text}) with "${answer}"`,
     );
   };
+  let scoops = 1;
+  let flavours: string[] = [];
+
+  const formatter = new Intl.ListFormat("en", {
+    style: "long",
+    type: "conjunction",
+  });
 </script>
 
 <hr />
@@ -88,3 +94,33 @@
 <p>
   selected question {selected ? selected.id : "[waiting...]"}
 </p>
+
+<h2>Size</h2>
+
+{#each [1, 2, 3] as number}
+  <label>
+    <input type="radio" name="scoops" value={number} bind:group={scoops} />
+    {number}
+    {number === 1 ? "scoop" : "scoops"}
+  </label>
+{/each}
+
+<h2>Flavours</h2>
+
+<select multiple bind:value={flavours}>
+  {#each ["cookies and cream", "mint choc chip", "raspberry ripple"] as flavour}
+    <option>{flavour}</option>
+  {/each}
+</select>
+
+{#if flavours.length === 0}
+  <p>Please select at least one flavour</p>
+{:else if flavours.length > scoops}
+  <p>Can't order more flavours than scoops!</p>
+{:else}
+  <p>
+    You ordered {scoops}
+    {scoops === 1 ? "scoop" : "scoops"}
+    of {formatter.format(flavours)}
+  </p>
+{/if}

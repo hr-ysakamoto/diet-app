@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Inner from "./Inner.svelte";
+  import Outer from "./Outer.svelte";
 
   let m = { x: 0, y: 0 };
   const handleMessage = (event: any) => {
@@ -14,7 +14,7 @@
 >
   <p>The mouse position is {m.x} x {m.y}</p>
   <button on:click|once={() => alert("clicked")}> Click me </button>
-  <Inner on:message={handleMessage} />
+  <Outer on:message={handleMessage} />
 </div>
 
 <style>
